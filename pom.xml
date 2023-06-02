@@ -74,7 +74,6 @@
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
-            <version>8.0.31</version>
         </dependency>
         <!-- lom bok插件 -->
         <dependency>
