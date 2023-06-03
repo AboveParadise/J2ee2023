@@ -27,7 +27,7 @@ CREATE TABLE `book` (
   `author` varchar(255) DEFAULT NULL,
   `isbn` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `pages` int DEFAULT NULL,
+  `page` int DEFAULT NULL,
   `price` double DEFAULT NULL,
   `publish_house` varchar(255) DEFAULT NULL,
   `publish_time` datetime(6) DEFAULT NULL,

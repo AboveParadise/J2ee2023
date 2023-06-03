@@ -10,6 +10,6 @@ import java.util.Map;
 @Mapper
 @Component
 public interface BookMapper {
-    List<Book> findBook(String keyword);
+    List<Book> findBookListByLike(String keyword);
     int updateBook(Map<String, Object> map);
 }
