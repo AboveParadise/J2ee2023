@@ -24,8 +24,10 @@ public class UserService implements UserDetailsService{
     public User add_user(User user){
         return user_repository.saveAndFlush(user);
     }
+    @Override
     public UserDetails loadUserByUsername(String username){
         User user = user_repository.findByUsername(username);
+        System.out.println("username");
         String role = String.valueOf(user.getIs_admin());
         List<GrantedAuthority> authorityList = new ArrayList<>();
         authorityList.add(new SimpleGrantedAuthority("ROLE_" + role));
