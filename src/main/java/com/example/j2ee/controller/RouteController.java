@@ -16,6 +16,11 @@ public class RouteController {
         return "index";
     }
 
+    @RequestMapping({"/register"})
+    public String toResgister() {
+        return "register";
+    }
+
     @RequestMapping("/{filename}/{name}")
     public String change(@PathVariable String filename, @PathVariable String name){
         return filename+ '/' +name;
