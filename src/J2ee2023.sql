@@ -31,7 +31,7 @@ CREATE TABLE `users` (
   `identity` int DEFAULT NULL,
   `is_admin` int DEFAULT NULL,
   `nickname` varchar(255) DEFAULT NULL,
-  `password` varchar(255) DEFAULT NULL,
+  `pwd` varchar(255) DEFAULT NULL,
   `balance` int DEFAULT NULL,
   `tel` varchar(255) DEFAULT NULL,
   `username` varchar(255) DEFAULT NULL,
@@ -45,7 +45,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'SH','prof','2002-10-10','189452@163.com',1,1,'student','123',5,'15984632177','stu');
+INSERT INTO `users` VALUES (1,'SH','prof','2002-10-10','189452@163.com',1,1,'administer','123',5,'15984632177','admin');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
