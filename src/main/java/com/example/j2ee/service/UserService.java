@@ -30,6 +30,8 @@ public class UserService implements UserDetailsService{
         return new org.springframework.security.core.userdetails.User(user.getUsername(),
                 password_encoder.encode(user.getPwd()), authorityList);
     }
-
+    public User findByUsername(String username) {
+        return user_repository.findByUsername(username);
+    }
 
 }

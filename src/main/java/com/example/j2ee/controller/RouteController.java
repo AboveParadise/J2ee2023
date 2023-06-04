@@ -11,9 +11,9 @@ public class RouteController {
         return "index";
     }
 
-
     @RequestMapping("/{filename}/{name}")
     public String change(@PathVariable String filename, @PathVariable String name){
         return filename+ '/' +name;
+
     }
 }

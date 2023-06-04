@@ -40,6 +40,10 @@ public class Returner implements Serializable {
         this.code = code;
         this.data = data;
     }
+    public Returner(Integer code, String message){
+        this.code = code;
+        this.message = message;
+    }
 
     public Returner(Integer code, String message, Object data) {
         this.code = code;
