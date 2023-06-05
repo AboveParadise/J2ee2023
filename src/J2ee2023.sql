@@ -23,17 +23,17 @@ DROP TABLE IF EXISTS `book`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `book` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `author` varchar(255) DEFAULT NULL,
-  `isbn` varchar(255) DEFAULT NULL,
-  `name` varchar(255) DEFAULT NULL,
-  `page` int DEFAULT NULL,
-  `price` double DEFAULT NULL,
-  `publish_house` varchar(255) DEFAULT NULL,
-  `publish_time` datetime(6) DEFAULT NULL,
-  `number` int DEFAULT NULL,
-  `type` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                        `id` int NOT NULL AUTO_INCREMENT,
+                        `author` varchar(255) DEFAULT NULL,
+                        `isbn` varchar(255) DEFAULT NULL,
+                        `name` varchar(255) DEFAULT NULL,
+                        `page` int DEFAULT NULL,
+                        `price` double DEFAULT NULL,
+                        `publish_house` varchar(255) DEFAULT NULL,
+                        `publish_time` datetime(6) DEFAULT NULL,
+                        `number` int DEFAULT NULL,
+                        `type` varchar(255) DEFAULT NULL,
+                        PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,19 +55,19 @@ DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `address` varchar(255) DEFAULT NULL,
-  `profile_pic` varchar(255) DEFAULT NULL,
-  `birth` date DEFAULT NULL,
-  `email` varchar(255) DEFAULT NULL,
-  `identity` int DEFAULT NULL,
-  `is_admin` int DEFAULT NULL,
-  `nickname` varchar(255) DEFAULT NULL,
-  `pwd` varchar(255) DEFAULT NULL,
-  `balance` int DEFAULT NULL,
-  `tel` varchar(255) DEFAULT NULL,
-  `username` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                         `id` int NOT NULL AUTO_INCREMENT,
+                         `address` varchar(255) DEFAULT NULL,
+                         `profile_pic` varchar(255) DEFAULT NULL,
+                         `birth` date DEFAULT NULL,
+                         `email` varchar(255) DEFAULT NULL,
+                         `identity` int DEFAULT NULL,
+                         `is_admin` int DEFAULT NULL,
+                         `nickname` varchar(255) DEFAULT NULL,
+                         `pwd` varchar(255) DEFAULT NULL,
+                         `balance` int DEFAULT NULL,
+                         `tel` varchar(255) DEFAULT NULL,
+                         `username` varchar(255) DEFAULT NULL,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

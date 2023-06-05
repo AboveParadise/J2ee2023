@@ -24,7 +24,6 @@ public class BookController {
     }
     @PostMapping("/add")
     public Returner addBook(@RequestBody Book book) {
-        System.out.println(111);
         return new Returner(200, bookService.addBook(book));
     }
 
