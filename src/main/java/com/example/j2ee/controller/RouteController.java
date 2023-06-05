@@ -24,6 +24,5 @@ public class RouteController {
     @RequestMapping("/{filename}/{name}")
     public String change(@PathVariable String filename, @PathVariable String name){
         return filename+ '/' +name;
-
     }
 }
