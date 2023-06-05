@@ -53,6 +53,9 @@
             <if test="address != null and address != ''">
                 address = #{address},
             </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
             <if test="balance != null">
                 `balance` = #{balance},
             </if>
