@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <!--字体图标-->
+  <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+  <!--骨架样式-->
+  <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+  <!--皮肤-->
+  <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+  <!--jquery-->
+  <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+  <!--核心组件-->
+  <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+  <!--表单验证-->
+  <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
+</head>
+<body>
+  <div>
+    <p style="
+    color:#000000;
+    padding:8px;
+    width:5em;
+    font-size: 20px;
+    font-weight:bold;
+    ">
+      上架图书
+    </p>
+    <form id="form">
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle required">书名</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="name" class="javaex-text" data-type="required" placeholder="书名" />
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle required">ISBN号</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="isbn" class="javaex-text" placeholder="ISBN号" />
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle required">作者</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="author" class="javaex-text" data-type="required" placeholder="作者" />
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle required">页数</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="page" class="javaex-text" data-type="positive_int" placeholder="页数" error-msg="页数应为正整数"/>
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">出版社</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="publish_house" class="javaex-text" placeholder="出版社" />
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">出版时间</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="publish_time" class="javaex-date" style="width: 180px;" value="" readonly/>
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">定价</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="price" class="javaex-text" data-type="money" placeholder="定价" error-msg="定价应为正整数/两位小数"/>
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle required">库存数量</p></div>
+        <div class="javaex-unit-right">
+          <input type="text" id="number" class="javaex-text" data-type="nonnegative_int" placeholder="库存数量" error-msg="库存应为正整数"/>
+        </div>
+      </div>
+      <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">类别</p></div>
+        <div class="javaex-unit-right">
+          <select id="type">
+            <option value="">请选择</option>
+            <option value="马克思主义、列宁主义、毛泽东思想、邓小平理论">马克思主义、列宁主义、毛泽东思想、邓小平理论</option>
+            <option value="哲学、宗教">哲学、宗教</option>
+            <option value="社会科学总论">社会科学总论</option>
+            <option value="政治、法律">政治、法律</option>
+            <option value="军事">军事</option>
+            <option value="经济">经济</option>
+            <option value="文化、科学、教育、体育">文化、科学、教育、体育</option>
+            <option value="文化、科学、教育、体育">文化、科学、教育、体育</option>
+            <option value="文学">文学</option>
+            <option value="历史、地理">历史、地理</option>
+            <option value="自然科学总论">自然科学总论</option>
+            <option value="数理科学和化学">数理科学和化学</option>
+            <option value="天文学、地球科学">天文学、地球科学</option>
+            <option value="生物科学">生物科学</option>
+            <option value="医药、卫生">医药、卫生</option>
+            <option value="工业技术">工业技术</option>
+            <option value="农业科学">农业科学</option>
+            <option value="交通运输">交通运输</option>
+            <option value="航空、航天">航空、航天</option>
+            <option value="环境科学、安全科学">环境科学、安全科学</option>
+            <option value="综合性图书">综合性图书</option>
+          </select>
+        </div>
+      </div>
+      <div class="javaex-unit clear tc">
+        <input type="button" id="save" class="javaex-btn yes" value="上架" />
+      </div>
+    </form>
+  </div>
+<script>
+  javaex.select({
+    id : "type",
+    isSearch : true
+  });
+  javaex.date({
+    id : "publish_time",
+    monthNum: 1,
+    minTime : "1900-01-01",
+    callback : function(rtn) {
+
+    }
+  });
+  $("#save").click(function() {
+    const name = $("#name").val()
+    const author = $("#author").val()
+    const isbn = $("#isbn").val()
+    const page = $("#page").val()
+    const publish_house = $("#publish_house").val()
+    const publish_time = $("#publish_time").val()
+    const price = $("#price").val()
+    const number = $("#number").val()
+    const type = $("#type").val()
+    if(!name || name === "") {
+      javaex.optTip({
+        content : "图书名称不能为空!",
+        type : "error"
+      });
+      return
+    }
+    if(!isbn || isbn === "") {
+      javaex.optTip({
+        content : "ISBN号不能为空!",
+        type : "error"
+      });
+      return
+    }
+    if(!author || author === "") {
+      javaex.optTip({
+        content : "作者不能为空!",
+        type : "error"
+      });
+      return
+    }
+    if(!number || number === "") {
+      javaex.optTip({
+        content : "库存不能为空!",
+        type : "error"
+      });
+      return
+    }
+    console.log(JSON.stringify({
+      "name": name, "isbn": isbn, "author": author, "page": page, "publishHouse": publish_house, "price": price,
+      "number": number, "type": type, "publishTime": publish_time
+    }))
+    $.ajax({
+      //请求方式
+      type : "POST",
+      //请求的媒体类型
+      contentType: "application/json;charset=UTF-8",
+      //请求地址
+      url : "/book/add",
+      //数据，json字符串
+      data : JSON.stringify({
+        "name": name, "isbn": isbn, "author": author, "page": page, "publishHouse": publish_house, "price": price,
+        "number": number, "type": type, "publishTime": publish_time
+      }),
+      success: function (result) {
+        console.log(result.data)
+        if (result.code == 200) {
+          javaex.message({
+            content : "添加成功",
+            type : "success"
+          });
+        }
+      }
+    })
+  });
+</script>
+</body>
+</html>
