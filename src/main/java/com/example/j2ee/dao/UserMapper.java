@@ -7,5 +7,5 @@ import java.util.Map;
 @Mapper
 @Component
 public interface UserMapper {
-    int update_user(Map<String, Object> map);
+    int updateUser(Map<String,Object> map);
 }

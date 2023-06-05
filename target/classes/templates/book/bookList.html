@@ -59,7 +59,7 @@
                 const id = pageSize * (currPage - 1) + index + 1;
                 tableItems += "<tr align='center'><td>"+id+"</td><td>"+value.name+"</td><td>"+value.author+"</td><td>"+value.isbn+"</td>" +
                     "<td>"+value.page+"</td><td>"+value.price+"</td><td>"+value.publishHouse+"</td><td>"+value.publishTime+"</td>" +
-                    "<td>"+value.number+"</td><td>"+value.type+"</td><td>" + 
+                    "<td>"+value.number+"</td><td>"+value.type+"</td><td>" +
                     "<button class='button blue empty' onclick='updateBook("+value.id+")'>编辑</button> &nbsp;<button class='button yellow empty' onclick='delBook("+value.id+")'>删除</button></td></tr>";
             });
             $("#tableItems").html(tableItems);

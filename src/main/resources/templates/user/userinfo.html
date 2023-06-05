@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <!--字体图标-->
-    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
-    <!--动画-->
-    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/animate.css" rel="stylesheet" />
-    <!--骨架样式-->
-    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
-    <!--皮肤（缇娜）-->
-    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/tina.css" rel="stylesheet" />
+        <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+        <!--动画-->
+        <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/animate.css" rel="stylesheet" />
+        <!--骨架样式-->
+        <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+        <!--皮肤（缇娜）-->
+        <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/tina.css" rel="stylesheet" />
     <!--jquery，不可修改版本-->
     <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
     <!--全局动态修改-->
@@ -27,7 +27,7 @@
     <div class="javaex-main">
         <div class="javaex-desc">
             <div class="javaex-desc-header">
-                <div class="javaex-desc-title">用户信息</div>
+                <div class="javaex-desc-title">我的信息</div>
                 <div class="javaex-desc-extra">
                     <button class="javaex-btn primary" size="small" onclick="updateinfo()">修改</button>
                 </div>
@@ -38,20 +38,24 @@
                     <tr>
                         <td class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
-                                <span class="javaex-desc-item-label">用户名：</span>
-                                <span class="javaex-desc-item-content">张三</span>
+                                <span class="javaex-desc-item-label">昵称：</span>
+                                <div class="javaex-desc-item-content" id="nickname"></div>
                             </div>
                         </td>
+                        </tr>
+                    <tr>
                         <td class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
                                 <span class="javaex-desc-item-label">手机号：</span>
-                                <span class="javaex-desc-item-content">18100000000</span>
+                                <div class="javaex-desc-item-content" id="tel"></div>
                             </div>
                         </td>
+                        </tr>
+                    <tr>
                         <td class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
-                                <span class="javaex-desc-item-label">邮箱：</span>
-                                <span class="javaex-desc-item-content">1231567985@163.com</span>
+                                <span class="javaex-desc-item-label">地址：</span>
+                                <div class="javaex-desc-item-content" id="address"></div>
                             </div>
                         </td>
                     </tr>
@@ -61,13 +65,23 @@
                         <td class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
                                 <span class="javaex-desc-item-label">生日：</span>
-                                <span class="javaex-desc-item-content">学校</span>
+                                <div class="javaex-desc-item-content" id="birth"></div>
                             </div>
                         </td>
+                        </tr>
+                    <tr>
+                        <td colspan="2" class="javaex-desc-item javaex-desc-item-cell">
+                            <div class="javaex-desc-item-container">
+                                <span class="javaex-desc-item-label">邮箱：</span>
+                                <div class="javaex-desc-item-content" id="email"></div>
+                            </div>
+                        </td>
+                        </tr>
+                    <tr>
                         <td colspan="2" class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
                                 <span class="javaex-desc-item-label">可借数量：</span>
-                                <span class="javaex-desc-item-content" id="balance" name="balance">5</span>
+                                <div class="javaex-desc-item-content" id="balance"></div>
                             </div>
                         </td>
                     </tr>
@@ -78,115 +92,39 @@
     </div>
 </div>
 
-<!--全部主体内容-->
-<div class="list-content">
-    <!--块元素-->
-    <div class="block">
-        <!--修饰块元素名称-->
-        <div class="banner">
-            <p class="tab fixed">个人信息</p>
-        </div>
-
-        <!--正文内容-->
-        <div class="main">
-            <form id="form">
-                <!--文本框-->
-                <div class="unit clear">
-                    <div class="left"><span class="required">*</span><p class="subtitle">昵称</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="nickname" name="nickname" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required">*</span><p class="subtitle">用户名</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="username" name="username" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required">*</span><p class="subtitle">密码</p></div>
-                    <div class="right">
-                        <input type="password" class="text" id="password" name="password" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">生日</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="birthday" name="birthday" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">电话</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="tel" name="tel" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <!--下拉选择框-->
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">身份</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="ident" name="ident" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">邮箱</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="email" name="email" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">地址</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="address" name="address" readonly="readonly"/>
-                    </div>
-                </div>
-
-                <div class="unit clear">
-                    <div class="left"><span class="required"></span><p class="subtitle">可借数量</p></div>
-                    <div class="right">
-                        <input type="text" class="text" id="size" name="size" readonly="readonly"/>
-                    </div>
-                </div>
-                <br>
-                <br>
-            </form>
-        </div>
-    </div>
-</div>
 </body>
 <script>
     javaex.select({
         id : "select",
         isSearch : false
     });
+    let user;
     // 页面加载执行
     $(document).ready(function(){
         // get读取参数
         $.get("/user/currUser", function(data){
-            var user = data.data;
-            $("#nickname").val(user.nickname);
-            $("#username").val(user.username);
-            $("#password").val(user.pwd);
-            $("#birthday").val(user.birth);
-            $("#tel").val(user.tel);
-            $("#email").val(user.email);
-            $("#address").val(user.address);
-            $("#size").val(user.balance);
-            $("#ident").val(user.ident);
+            user = data.data;
+
+            let div1 = document.getElementById("balance");
+            div1.innerText = user.balance;
+            let div2 = document.getElementById("nickname");
+            div2.innerText = user.nickname;
+            let div4 = document.getElementById("birth")
+            div4.innerText = user.birth.substring(0, 10);
+            let div5 = document.getElementById("email");
+            div5.innerText = user.email;
+            let div6 = document.getElementById("address");
+            div6.innerText = user.address;
+            let div7 = document.getElementById("tel");
+            div7.innerText = user.tel;
+
 
             return false;
         });
     });
-    function updateinfo(id) {
-        console.log("update info"+id);
-        window.location.href="/user/userInfoUpdate?id="+id;
+    function updateinfo() {
+        console.log("update info"+user.id);
+        window.location.href="/user/userInfoUpdate?id="+user.id;
     }
 </script>
 </html>

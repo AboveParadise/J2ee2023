@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.j2ee.dao.UserMapper">
+    <resultMap id="BaseResultMap" type="com.example.j2ee.entity.User" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="profile_pic" property="profile_pic" jdbcType="VARCHAR" />
+        <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+        <result column="username" property="username" jdbcType="VARCHAR" />
+        <result column="pwd" property="pwd" jdbcType="VARCHAR" />
+        <result column="birth" property="birth" jdbcType="DATE" />
+        <result column="is_admin" property="is_admin" jdbcType="INTEGER" />
+        <result column="tel" property="tel" jdbcType="VARCHAR" />
+        <result column="email" property="email" jdbcType="VARCHAR" />
+        <result column="address" property="address" jdbcType="VARCHAR" />
+        <result column="balance" property="balance" jdbcType="INTEGER" />
+        <result column="identity" property="identity" jdbcType="INTEGER" />
+    </resultMap>
+
+    <!-- 模糊查询 -->
+    <select id="findListByLike" resultMap="BaseResultMap" >
+        select * from users
+        <where>
+            <if test="_parameter != null and _parameter != ''">
+                and `username` like CONCAT('%',#{_parameter},'%') or `nickname` like CONCAT('%',#{_parameter},'%')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateUser" parameterType="map">
+        update users
+        <set>
+            <if test="profile_pic != null and profile_pic != ''">
+                profile_pic = #{profile_pic},
+            </if>
+            <if test="nickname != null and nickname != ''">
+                nickname = #{nickname},
+            </if>
+            <if test="username != null and username != ''">
+                username = #{username},
+            </if>
+            <if test="pwd != null and pwd != ''">
+                pwd = #{pwd},
+            </if>
+            <if test="birth != null">
+                birth = #{birth},
+            </if>
+            <if test="is_admin != null">
+                is_admin = #{is_admin},
+            </if>
+            <if test="tel != null and tel != ''">
+                tel = #{tel},
+            </if>
+            <if test="address != null and address != ''">
+                address = #{address},
+            </if>
+            <if test="balance != null">
+                `balance` = #{balance},
+            </if>
+            <if test="identity != null">
+                `identity` = #{identity},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+</mapper>
