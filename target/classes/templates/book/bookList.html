@@ -79,7 +79,6 @@
   }
 
   function delBook(obj, id) {
-      console.log(id)
       javaex.deleteDialog(obj, {
           content : "确定要删除么？",
           confirm : function() {
@@ -88,7 +87,7 @@
                   contentType: "application/json;charset=UTF-8",
                   url : "/book/delete?id=" + id,
               })
-              setTimeout(function(){ window.location.reload();},1500)
+              setTimeout(function(){ window.location.reload();},800)
           }
       });
   }
