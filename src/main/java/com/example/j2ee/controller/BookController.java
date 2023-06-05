@@ -45,6 +45,7 @@ public class BookController {
     @GetMapping("/delete")
     public Returner delBook(Integer id) {
         bookService.deleteBook(id);
+        System.out.println(12345);
         return new Returner(200);
     }
 }
