@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `address` varchar(255) DEFAULT NULL,
-  `profilepic` varchar(255) DEFAULT NULL,
-  `birthday` date DEFAULT NULL,
+  `profile_pic` varchar(255) DEFAULT NULL,
+  `birth` date DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `identity` int DEFAULT NULL,
   `is_admin` int DEFAULT NULL,
@@ -58,4 +58,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-06-04 20:59:38
+-- Dump completed on 2023-06-04 23:15:12
