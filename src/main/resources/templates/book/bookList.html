@@ -18,6 +18,16 @@
 </head>
 <body>
 <div style="border-left: 220px">
+    <p style="
+    color:#000000;
+    padding:8px;
+    width:5em;
+    font-size: 20px;
+    font-weight:bold;
+    float: left;
+    ">
+        图书列表
+    </p>
     <span class="javaex-search-group" style="float: right">
         <input id="keyword" type="text" class="javaex-text" placeholder="书名/ISBN号" />
         <button class="javaex-btn blue" onclick="search()">搜索</button>
@@ -95,7 +105,7 @@
   }
 
   function updateBook(id) {
-      window.location.href = "/book/book-update?id=" + id
+      window.location.href = "/book/bookUpdate?id=" + id
   }
 
   function delBook(obj, id) {
