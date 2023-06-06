@@ -54,4 +54,8 @@ public class UserController {
         return new Returner(200, userService.updateUser(user));
     }
 
+    @PostMapping("/add")
+    public Returner addUser(@RequestBody User user) {
+        return new Returner(200, userService.addUser(user));
+    }
 }

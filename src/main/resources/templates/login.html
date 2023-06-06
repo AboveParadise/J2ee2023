@@ -45,7 +45,7 @@
       </div>
       <div class="form-btn">
           <input type="button" class="ui-button" id="register" value="注册" />
-          <input type="button" class="ui-button" id="save" value="登录" style="margin-left: 35%"/>
+          <input type="button" class="ui-button" id="login" value="登录" style="margin-left: 35%"/>
       </div>
     </form>
   </div>
@@ -55,7 +55,7 @@
         window.location.href="/register";
     })
   // 登录
-  $("#save").on("click", function(){
+  $("#login").on("click", function(){
     var username =  $("#uname").val();
     var password =  $("#pass").val();
     // 记住我

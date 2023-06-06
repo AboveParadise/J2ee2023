@@ -54,4 +54,8 @@ public class UserService implements UserDetailsService{
         return user_mapper.updateUser(BeanUtil.beanToMap(user))>0;
     }
 
+    public User addUser(User user) {
+        System.out.println(user.getUsername());
+        return user_repository.saveAndFlush(user);
+    }
 }

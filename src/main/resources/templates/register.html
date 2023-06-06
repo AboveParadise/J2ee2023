@@ -1,10 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--字体图标-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+    <!--骨架样式-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+    <!--皮肤-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+    <!--jquery-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+    <!--核心组件-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+    <!--表单验证-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style>
+        .bg-wrap, body, html {height: 100%;}
+        input{line-height: normal;-webkit-appearance: textfield;background-color: white;-webkit-rtl-ordering: logical;cursor: text;padding: 1px;border-width: 2px;border-style: inset;border-color: initial;border-image: initial;}
+        input[type="text"], input[type="password"]{border: 0;outline: 0;}
+        input, button{text-rendering: auto;color: initial;letter-spacing: normal;word-spacing: normal;text-transform: none;text-indent: 0px;text-shadow: none;display: inline-block;text-align: start;margin: 0em;font: 400 13.3333px Arial;}
+        input[type=button]{-webkit-appearance: button;cursor: pointer;}
+        .bg-wrap {position: relative;background: url(http://img.javaex.cn/FipOsQoe90u_7i3dOVpaeX5QD7c6) top left no-repeat;background-size: cover;overflow: hidden;}
+        .main-cont-wrap{z-index: 1;position: absolute;top: 50%;left: 50%;margin-left: -190px;margin-top: -255px;box-sizing: border-box;width: 380px;padding: 30px 30px 40px;background: #fff;box-shadow: 0 20px 30px 0 rgba(63,63,65,.06);border-radius: 10px;}
+        .form-title{margin-bottom: 40px; text-align: center}
+        .form-title>span{font-size: 20px;color: #2589ff;}
+        .form-item{margin-bottom: 30px;position: relative;height: 40px;line-height: 40px;border-bottom: 1px solid #e3e3e3;box-sizing: border-box;}
+        .form-btn{margin-top: 40px;}
+        .ui-button{width: 100px;height: 50px;text-align: center;color: #fff;background: rgba(64, 147, 245, 0.99);border-radius: 6px;font-size: 16px;border: 0;outline: 0;}
+    </style>
 </head>
 <body>
-register
+<div class="bg-wrap">
+    <div class="main-cont-wrap login-model">
+        <form id="form">
+            <div class="form-title">
+                <span>图书馆管理系统</span>
+            </div>
+            <div class="form-item">
+                <input type="text" class="javaex-text" placeholder="请输入用户名" autocomplete="off" id="uname" name="loginName" />
+            </div>
+            <div class="form-item">
+                <input type="password" class="javaex-text" placeholder="请输入密码" autocomplete="off" name="password" id="pass" />
+            </div>
+            <div class="form-item">
+                <input type="password" class="javaex-text" placeholder="请再次输入密码" autocomplete="off" name="password" id="repass" />
+            </div>
+            <div class="form-btn">
+                <input type="button" class="ui-button" id="back" value="返回" />
+                <input type="button" class="ui-button" id="register" value="注册" style="margin-left: 35%"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    $("#register").on("click", function (){
+        var username =  $("#uname").val()
+        var password =  $("#pass").val()
+        var repassword = $("#repass").val()
+        // 记住我
+        if(!username || username === "") {
+            window.alert("请输入用户名")
+            return
+        }
+
+        if(!password || password === "") {
+            window.alert("请输入密码")
+            return;
+        }
+
+        if(!repassword || repassword === "") {
+            window.alert("请再次输入密码")
+            return;
+        }
+
+        if(repassword !== password) {
+            window.alert("两次输入密码不一致")
+            return;
+        }
+
+
+    })
+    $("#back").on("click", function (){
+        window.location.href="/login";
+    })
+    // 登录
+    $("#register").on("click", function(){
+        var username =  $("#uname").val();
+        var password =  $("#pass").val();
+        // 记住我
+        var remember = $("#remember").val();
+        if(!username || username === "") {
+            window.alert("请输入用户名")
+            return
+        }
+
+        if(!password || password === "") {
+            window.alert("请输入密码")
+            return;
+        }
+
+        $.ajax({
+            //请求方式
+            type : "POST",
+            //请求的媒体类型
+            contentType: "application/json;charset=UTF-8",
+            //请求地址
+            url : "/user/add",
+            //数据，json字符串
+            data : JSON.stringify({
+                "username": username, "pwd": password, "is_admin": false
+            }),
+            success: function (result) {
+                if (result.code == 200) {
+                    javaex.message({
+                        content : "注册成功",
+                        type : "success"
+                    });
+                }
+            }
+        })
+    });
+</script>
 </body>
 </html>
