@@ -46,22 +46,23 @@
 			</ul>
 <!--			此处应有借阅-->
 
+			<li class="javaex-menu-item" id="manage_reader">
+				<a href="javascript:;" >读者管理<i class="icon-angle-down"></i></a>
+				<ul>
+					<li><a id="reader-list" href="javascript:page('user/userList.html');">读者列表</a></li>
+					<li><a id="reader-add" href="javascript:page('user/userAdd.html');">读者添加</a></li>
+<!--					<li><a id="user-manage" href="javascript:page('user/user-list');">用户管理</a></li>-->
+					<li><a id="admin-add" href="javascript:page('user/adminAdd.html');">添加管理员</a></li>
+				</ul>
+			</li>
 			<ul>
 				<li class="javaex-menu-item">
-					<a href="javascript:;">用户管理<i class="icon-angle-down"></i></a>
-					<ul>
-						<li><a href="javaScript:page('./user/userinfo.html');">我的信息</a></li>
-						<li><a href="javaScript:page('book/book-add');">图书上架</a></li>
-					</ul>
-				</li>
-			</ul>
-			<ul>
-				<li class="javaex-menu-item">
-					<a href="javascript:;">个人中心<i class="icon-angle-down"></i></a>
-					<ul>
-						<li><a href="javaScript:page('./user/userinfo.html');">我的信息</a></li>
-						<li><a href="javaScript:page('book/book-add');">图书上架</a></li>
-					</ul>
+					<a href="javascript:page('./user/userinfo.html');">个人中心
+						<i class="icon-angle-right"></i>
+					</a>
+	<!--					<ul>-->
+	<!--						<li><a href="javaScript:page('./user/userinfo.html');">我的信息</a></li>-->
+	<!--					</ul>-->
 				</li>
 			</ul>
 
@@ -87,5 +88,30 @@
 	function page(url) {
 		$("#page").attr("src", url);
 	}
+	$(document).ready(function(){
+		// 页面一加载, 读取登录用户信息, 进行权限限制
+		$.get("/user/currUser", function(data){
+			var code = data.code;
+			var user = data.data;
+			if (code == 200) {
+				// 设置用户昵称
+				$("#nickname").text(user.nickname);
+				// 根据用户权限, 控制用户可见菜单
+				var auth = user.is_admin;
+				// is_admin为0代表非管理员
+				if (auth === 0) {
+					console.log(auth);
+					// 若为普通用户权限, 则无法访问修改类菜单 无法添加图书,添加读者,管理用户以及添加管理员
+					$("#add-book").hide();
+					$("#reader-add").hide();
+					$("#manage_reader").hide();
+					$("#admin-add").hide();
+					$("#reader-list").hide();
+				}
+			}
+
+			return false;
+		});
+	});
 </script>
 </html>

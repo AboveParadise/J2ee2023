@@ -17,7 +17,7 @@
     </resultMap>
 
     <!-- 模糊查询 -->
-    <select id="findListByLike" resultMap="BaseResultMap" >
+    <select id="findUserByLike" resultMap="BaseResultMap" >
         select * from users
         <where>
             <if test="_parameter != null and _parameter != ''">

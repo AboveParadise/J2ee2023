@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <!--字体图标-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+    <!--骨架样式-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+    <!--皮肤-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+    <!--jquery-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+    <!--核心组件-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+    <!--表单验证-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
+    <meta charset="utf-8">
+</head>
+<body>
+<div style="border-left: 220px">
+    <p style="
+    color:#000000;
+    padding:8px;
+    width:5em;
+    font-size: 20px;
+    font-weight:bold;
+    float: left;
+    ">
+        用户列表
+    </p>
+    <span class="javaex-search-group" style="float: right">
+        <input id="keyword" type="text" class="javaex-text" placeholder="用户昵称" />
+        <button class="javaex-btn blue" onclick="search()">搜索</button>
+    </span>
+    <table id="table" class="javaex-table td-c-1 td-c-2">
+        <thead>
+        <tr align="center">
+            <th>序号</th>
+            <th>昵称</th>
+            <th>账号</th>
+            <th>生日</th>
+            <th>电话</th>
+            <th>邮箱</th>
+            <th>可借数量</th>
+
+            <th style="width:180px">操作</th>
+        </tr>
+        </thead>
+        <tbody id="tableItems"></tbody>
+    </table>
+    <div class="javaex-page" style="position: fixed; left: 35%; bottom: 20%">
+        <ul id="page" class="javaex-pagination"></ul>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        getUser(1,"",10);
+    });
+    function getUser(page, keyword, pageSize) {
+        $.ajax({
+            type: "POST",
+            contentType: "application/json;charset=UTF-8",
+            url : "/user/list",
+            data :JSON.stringify({"currPage":page,"keyword": keyword,"pageSize": pageSize}),
+            success: function (result) {
+                console.log(result.data)
+                const total = result.data.total;
+                const currPage = result.data.currPage;
+                const pageSize = result.data.pageSize;
+                const list = result.data.list
+                let pages = total / pageSize;
+                if (total % pageSize !== 0) {
+                    pages++;
+                }
+                let tableItems = "";
+
+                javaex.page({
+                    id : "page",
+                    pageNum : currPage,
+                    pageSize : pageSize,
+                    totalPages : pages,
+                    isShowJumpPage : true, // 是否显示跳页
+                    isShowSelect : false,
+                    totalNum : total,
+                    position : "left",
+                    callback : function(rtn) {
+                        getUser(rtn.pageNum, keyword, pageSize)
+                    }
+                });
+
+                $.each(list, function (index, value) {
+                    const id = pageSize * (currPage - 1) + index + 1;
+                    tableItems += "<tr align='center'><td>"+id+"</td><td>"+value.nickname+"</td><td>"+value.username+"</td><td>"+value.birth+"</td>" +
+                        "<td>"+value.tel+"</td><td>"+value.email+"</td><td>"+value.balance+"</td><td>"+
+                        "<button class='javaex-btn primary' plain onclick='updateUser("+value.id+")' style='float: left'>编辑</button>" +
+                        "<button class='javaex-btn danger' plain onclick='delUser(this, "+value.id+")' style='float: right'>删除</button></td></tr>"
+                });
+                $("#tableItems").html(tableItems);
+            }
+        })
+    }
+
+    function updateUser(id) {
+        window.location.href = "/user/userInfoUpdate?id=" + id
+    }
+
+    function delUser(obj, id) {
+        javaex.deleteDialog(obj, {
+            content : "确定要删除么？",
+            confirm : function() {
+                $.ajax({
+                    type: "GET",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "/user/delete?id=" + id,
+                })
+                setTimeout(function(){ window.location.reload();},800)
+            }
+        });
+    }
+
+    function search() {
+        let keyword = $("#keyword").val()
+        console.log("search:" + keyword)
+        getUser(1,keyword,10)
+    }
+
+    javaex.table({
+        id : "table",
+        isDragColWidth : true,      // 是否允许拖动改变列宽
+        mode : "overflow",          // overflow表示允许使用父容器溢出来调整列的大小
+    });
+
+</script>
+</body>
+</html>
