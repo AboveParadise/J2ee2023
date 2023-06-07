@@ -35,20 +35,17 @@
             <if test="name != null and name != ''">
                 `name` = #{name},
             </if>
-            <if test="pages != null">
-                pages = #{pages},
+            <if test="page != null">
+                page = #{page},
             </if>
-            <if test="translate != null and translate != ''">
-                `translate` = #{translate},
-            </if>
-            <if test="publish != null and publish != ''">
-                publish = #{publish},
+            <if test="publishHouse != null and publishHouse != ''">
+                publish_house = #{publishHouse},
             </if>
             <if test="price != null">
                 price = #{price},
             </if>
-            <if test="size != null">
-                `size` = #{size},
+            <if test="number != null">
+                `number` = #{number},
             </if>
             <if test="type != null and type != ''">
                 `type` = #{type},

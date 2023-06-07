@@ -2,9 +2,235 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <!--字体图标-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+    <!--骨架样式-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+    <!--皮肤-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+    <!--jquery-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+    <!--核心组件-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+    <!--表单验证-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
+    <title>图书借阅</title>
 </head>
-<body>
+<style>
 
+</style>
+
+<body>
+<div class="list-content">
+    <div class="block">
+        <div class="banner">
+            <p style="
+    color:#000000;
+    padding:8px;
+    width:5em;
+    font-size: 20px;
+    font-weight:bold;
+    ">
+                编辑图书
+            </p>
+        </div>
+        <form id="form">
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">书名</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="name" class="javaex-text" data-type="required" placeholder="书名" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">ISBN号</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="isbn" class="javaex-text" placeholder="ISBN号" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">作者</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="author" class="javaex-text" data-type="required" placeholder="作者" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">页数</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="page" class="javaex-text" data-type="positive_int" placeholder="页数" error-msg="页数应为正整数" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">出版社</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="publish_house" class="javaex-text" placeholder="出版社" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">借阅时间</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="date2" class="javaex-date" style="width: 220px;" value="" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle">定价</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="price" class="javaex-text" data-type="money" placeholder="定价" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle required">库存数量</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="number" class="javaex-text" data-type="nonnegative_int" placeholder="库存数量" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear">
+                <div class="javaex-unit-left"><p class="subtitle required">类别</p></div>
+                <div class="javaex-unit-right">
+                    <input type="text" id="type" class="javaex-text" data-type="nonnegative_int" placeholder="类别" readonly/>
+                </div>
+            </div>
+            <div class="javaex-unit clear tc">
+                <input type="button" id="save" class="javaex-btn yes" value="借阅" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    var bookId = 0;
+    $(document).ready(function(){
+        bookId = GetQueryString("id")
+        $.get("/book/detail",{"id": bookId}, function(result){
+            let data = result.data;
+            console.log(data);
+            $("#name").val(data.name);
+            $("#isbn").val(data.isbn);
+            $("#author").val(data.author);
+            $("#page").val(data.page);
+            $("#price").val(data.price);
+            $("#publish_house").val(data.publishHouse);
+            $("#number").val(data.number);
+            $("#type").val(data.type);
+        });
+    });
+
+
+    function GetQueryString(name)
+    {
+        const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+        const r = window.location.search.substr(1).match(reg);
+        if (r!= null ) {
+            return r[2]
+        }
+        return null;
+    }
+
+
+    const currentDate = new Date();
+    const startDate = dateFormat("YYYY-mm-dd", currentDate);
+    const day = new Date();
+    day.setDate(day.getDate() + 1);
+    const endDate = dateFormat("YYYY-mm-dd", day);
+
+    let startTime = startDate;
+    let endTime = endDate;
+
+    javaex.date({
+        id : "date2",
+        monthNum : 2,
+        startDate : startDate,
+        endDate : endDate,
+        callback : function(rtn) {
+            startTime = rtn.startDate;
+            endTime = rtn.endDate;
+        }
+    });
+
+
+    $("#save").click(function() {
+        const bookName = $("#name").val();
+        const number = $("#number").val();
+        if (!bookName || bookName === "") {
+            javaex.optTip({
+                content : "请输入正确的图书编码!",
+                type : "error"
+            });
+            return false;
+        }
+
+        if (!number || number <= 0) {
+            javaex.optTip({
+                content : "库存数量不够, 无法借阅!",
+                type : "error"
+            });
+            return false;
+        }
+
+        let userId = 0;
+        $.get("/user/currUser", function(data){
+            userId = data.data.id;
+            console.log(userId);
+            if (userId >0) {
+                $.ajax({
+                    type : "POST",
+                    contentType: "application/json;charset=UTF-8",
+                    url : "/borrow/add",
+                    data : JSON.stringify({"userId":userId,"bookId":bookId,"borrowTime":startTime,"endTime":endTime,"returnTime":endTime}),
+                    success : function(result) {
+                        console.log(result);
+                        const data = result.data;
+                        if (result.code == 200) {
+                            javaex.message({
+                                content : "借阅成功",
+                                type : "success"
+                            });
+                            // 跳转至列表
+                            setTimeout(function(){window.location.href="/borrow/borrowList";},800)
+                        }else{
+                            javaex.message({
+                                content : result.msg,
+                                type : "error"
+                            });
+                            setTimeout(function(){},1500)
+                        }
+
+                    },
+                    error : function(e){
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+                });
+            }else {
+                javaex.message({
+                    content : "登录信息已失效, 请登录后借阅",
+                    type : "error"
+                });
+            }
+        });
+
+    });
+
+    // 日期格式化
+    function dateFormat(fmt, date) {
+        let ret;
+        const opt = {
+            "Y+": date.getFullYear().toString(),
+            "m+": (date.getMonth() + 1).toString(),
+            "d+": date.getDate().toString(),
+            "H+": date.getHours().toString(),
+            "M+": date.getMinutes().toString(),
+            "S+": date.getSeconds().toString()
+        };
+        for (const k in opt) {
+            ret = new RegExp("(" + k + ")").exec(fmt);
+            if (ret) {
+                fmt = fmt.replace(ret[1], (ret[1].length === 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")))
+            }
+        }
+        return fmt;
+    }
+
+</script>
 </body>
 </html>
