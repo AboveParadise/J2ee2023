@@ -28,7 +28,7 @@ public class BookService {
         List<Book> res = new ArrayList<>();
         int start = (pageIn.getCurrPage() - 1) * pageIn.getPageSize();
         int end = pageIn.getCurrPage() * pageIn.getPageSize();
-        if(end > list.size()) {
+        if (end > list.size()) {
             end = list.size();
         }
         res = list.subList(start, end);
@@ -44,7 +44,7 @@ public class BookService {
     }
 
     public boolean updateBook(Book book) {
-        return bookMapper.updateBook(BeanUtil.beanToMap(book))>0;
+        return bookMapper.updateBook(BeanUtil.beanToMap(book)) > 0;
     }
 
     public Book findBookById(Integer id) {
@@ -60,4 +60,8 @@ public class BookService {
         bookRepository.deleteById(id);
     }
 
+    public Book findBook(Integer id) {
+        Optional<Book> optional = bookRepository.findById(id);
+        return optional.orElse(null);
+    }
 }

@@ -59,6 +59,7 @@ public class UserController {
         return new Returner(200, userService.updateUser(user));
     }
 
+
     @ApiOperation("用户列表")
     @PostMapping("/list")
     public Returner getUsers(@RequestBody PageParam pageIn) {
@@ -76,6 +77,7 @@ public class UserController {
         return new Returner(200);
     }
     @ApiOperation("添加用户")
+
     @PostMapping("/add")
     public Returner addUser(@RequestBody User user) {
         return new Returner(200, userService.addUser(user));

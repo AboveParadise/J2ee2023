@@ -137,7 +137,7 @@
         var email = $("#email").val();
         var address = $("#address").val();
         var size = $("#size").val();
-        var identity = $('#select option:selected').text();// 身份
+        // var identity = $('#select option:selected').text();// 身份
         var is_admin = $("#is_admin").val()
         if (nickname == ""||nickname.length>12) {
             javaex.message({
@@ -165,7 +165,7 @@
 
 
         var json = {"id":id,"nickname":nickname,"username":username,"pwd":pwd,"birth":birth,
-            "is_admin":is_admin,"tel":tel,"email":email,"address":address,"size":size,"identity":identity};
+            "is_admin":is_admin,"tel":tel,"email":email,"address":address,"balance":size,"identity":identity};
         console.log(json)
         $.ajax({
             //请求方式

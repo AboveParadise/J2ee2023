@@ -77,5 +77,7 @@ public class UserService implements UserDetailsService{
     }
     public void deleteUser(Integer id) {
         user_repository.deleteById(id);
+
+
     }
 }
