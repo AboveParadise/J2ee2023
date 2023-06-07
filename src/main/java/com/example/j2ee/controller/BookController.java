@@ -29,6 +29,7 @@ public class BookController {
 
     @PostMapping("/update")
     public Returner modifyBook(@RequestBody Book book) {
+        System.out.println(book.getPage());
         return new Returner(200,bookService.updateBook(book));
     }
 
