@@ -82,6 +82,20 @@ INSERT INTO `users` VALUES (1,'SH','prof','2002-10-10','189452@163.com',1,1,'adm
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+
+DROP TABLE IF EXISTS `borrow`;
+CREATE TABLE `borrow` (
+                          `id` int(11) NOT NULL AUTO_INCREMENT,
+                          `user_id` int(11) DEFAULT NULL,
+                          `book_id` int(11) DEFAULT NULL,
+                          `borrow_time` datetime(6) DEFAULT NULL,
+                          `end_time` datetime(6) DEFAULT NULL,
+                          `return_time` datetime(6) DEFAULT NULL,
+                          `is_return` int(11) DEFAULT NULL,
+                          PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
