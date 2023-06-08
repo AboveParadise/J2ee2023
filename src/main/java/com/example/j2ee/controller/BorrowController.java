@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import com.example.j2ee.entity.Borrow;
 import com.example.j2ee.service.BookService;
 import com.example.j2ee.service.BorrowService;
+import com.example.j2ee.util.BorrowReturn;
 import com.example.j2ee.util.Returner;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -68,35 +69,30 @@ public class BorrowController {
     }
 
 
-//    @ApiOperation("已借阅列表")
-//    @GetMapping("/borrowed")
-//    public Returner borrowedList(Integer userId) {
-//        List<BackOut> outs = new ArrayList<>();
-//        if (userId!=null&&userId>0) {
-//            List<Borrow> borrows = borrowService.findBorrowsByUserIdAndRet(userId, Constants.NO);
-//            for (Borrow borrow : borrows) {
-//                BackOut backOut = new BackOut();
-//                BookOut out = bookService.findBookById(borrow.getBookId());
-//                BeanUtils.copyProperties(out,backOut);
-//
-//                backOut.setBorrowTime(DateUtil.format(borrow.getCreateTime(),Constants.DATE_FORMAT));
-//
-//                String endTimeStr = DateUtil.format(borrow.getEndTime(), Constants.DATE_FORMAT);
-//                backOut.setEndTime(endTimeStr);
-//                String toDay = DateUtil.format(new Date(), Constants.DATE_FORMAT);
-//                int i = toDay.compareTo(endTimeStr);
-//                if (i>0) {
-//                    backOut.setLate(Constants.YES_STR);
-//                }else {
-//                    backOut.setLate(Constants.NO_STR);
-//                }
-//
-//                outs.add(backOut);
-//            }
-//        }
-//
-//        return R.success(CodeEnum.SUCCESS,outs);
-//    }
+    @ApiOperation("已借阅列表")
+    @GetMapping("/borrowed")
+    public Returner borrowedList(Integer userId) {
+        List<BorrowReturn> res = new ArrayList<>();
+        List<Borrow> borrows = borrowService.findBorrowsByUserIdAndIsReturn(userId, 0);
+        for (Borrow borrow : borrows) {
+            BorrowReturn backOut = new BorrowReturn();
+            backOut.setBook(bookService.findBookById(borrow.getBookId()));
+
+            backOut.setBorrowTime(DateUtil.format(borrow.getBorrowTime(),"yyyy-MM-dd"));
+
+            String endTimeStr = DateUtil.format(borrow.getEndTime(), "yyyy-MM-dd");
+            backOut.setEndTime(endTimeStr);
+            String toDay = DateUtil.format(new Date(), "yyyy-MM-dd");
+            int i = toDay.compareTo(endTimeStr);
+            if (i>0) {
+                backOut.setLate("已逾期");
+            }else {
+                backOut.setLate("未逾期");
+            }
+            res.add(backOut);
+        }
+        return new Returner(200, res);
+    }
 
     @ApiOperation("归还书籍")
     @PostMapping("/ret")
