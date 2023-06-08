@@ -86,7 +86,7 @@ public class BorrowService {
     /**
      * user id查询所有 已借阅信息
      */
-    public List<Borrow> findBorrowsByUserIdAndRet(Integer userId, Integer ret) {
+    public List<Borrow> findBorrowsByUserIdAndIsReturn(Integer userId, Integer ret) {
         return borrowRepository.findBorrowsByUserIdAndIsReturn(userId,ret);
     }
 

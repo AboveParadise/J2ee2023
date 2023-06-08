@@ -3,8 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!--字体图标-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+    <!--骨架样式-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+    <!--皮肤-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+    <!--jquery-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+    <!--核心组件-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+    <!--表单验证-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
 </head>
 <body>
+<form id="form">
+
+    <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">用户名</p></div>
+        <div class="javaex-unit-right">
+            <input type="text" id="username" class="javaex-text" data-type="required" placeholder="用户名" readonly/>
+        </div>
+    </div>
+
+    <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">可借数量</p></div>
+        <div class="javaex-unit-right">
+            <input type="text" id="balance" class="javaex-text" data-type="required" placeholder="可借数量" readonly/>
+        </div>
+    </div>
+
+    <div class="javaex-unit clear">
+        <div class="javaex-unit-left"><p class="subtitle">已借阅图书</p></div>
+        <table id="table" class="javaex-table td-c-1 td-c-2">
+            <thead>
+            <tr align="center">
+                <th>序号</th>
+                <th>书名</th>
+                <th>ISBN</th>
+                <th>作者</th>
+                <th>页数</th>
+                <th>出版社</th>
+                <th>库存数量</th>
+                <th>类别</th>
+                <th>借阅时间</th>
+                <th>应还时间</th>
+                <th>是否逾期</th>
+                <th style="width:180px">操作</th>
+            </tr>
+            </thead>
+            <tbody id="tableItems"></tbody>
+        </table>
+    </div>
+</form>
+
+<script>
+    $(document).ready(function(){
+        $.get("/user/currUser", function(result) {
+            const user = result.data
+            console.log(user)
+            $("#username").val(user.username)
+            $("#balance").val(user.balance)
+            $.get("/borrow/borrowed",{"userId":user.id} ,function(result) {
+                console.log(result.data)
+                let text = ""
+                $.each(result.data,function(index,value) {
+                    const num = index + 1
+                    text+= "<tr align='center'><td>"+num+"</td><td>"+value.book.name+"</td><td>"+value.book.isbn+"</td><td>"+value.book.author+"</td>" +
+                        "<td>"+value.book.page+"</td><td>"+value.book.publishHouse+"</td><td>"+value.book.number+"</td>" +
+                        "<td>"+value.book.type+"</td><td>"+value.borrowTime+"</td><td>"+value.endTime+"</td><td>"+value.late+"</td><td>"+
+                        "<button class='javaex-btn primary' plain onclick='returnBook("+user.id+","+value.book.id+")'>归还图书</td></tr>";
+                })
+                $("#tableItems").html(text);
+            })
+        })
+    })
+    function returnBook(userId,bookId) {
+        console.log(userId, bookId)
+        $.post("/borrow/ret",{"userId":userId,"bookId":bookId},function(result) {
+            var code = result.code;
+            if (code == 200) {
+                javaex.message({
+                    content : "修改成功",
+                    type : "success"
+                });
+                setTimeout(function(){window.location.href="borrow/borrowReturn";},800)
+            }
+        },"json");
+
+        // 恢复异步
+    }
+</script>
 
 </body>
 </html>
