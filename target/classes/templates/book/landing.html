@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <!--字体图标-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/icomoon.css" rel="stylesheet" />
+    <!--骨架样式-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/common.css" rel="stylesheet" />
+    <!--皮肤-->
+    <link href="https://javaex.javaex.cn/javaex-5.4.1/pc/css/skin/default.css" rel="stylesheet" />
+    <!--jquery-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/lib/jquery-1.7.2.min.js"></script>
+    <!--核心组件-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex.js"></script>
+    <!--表单验证-->
+    <script src="https://javaex.javaex.cn/javaex-5.4.1/pc/js/javaex-formVerify.js"></script>
+</head>
+<body>
+<style>
+  .javaex-swiper ul.javaex-swiper-focus-bg a{display: block; width: 100%; height: 100%; background: no-repeat 50%; background-size: cover;}
+  .javaex-swiper .wrapper{width: 1420px; height: 106px; margin: 0 auto; position: relative; margin-top: 414px;}
+  .javaex-swiper .javaex-swiper-focus-box{width: 100%; height: 106px;margin: 0 auto; position: absolute; left: 0; bottom: 0; filter: progid:DXImageTransform.Microsoft.gradient(enabled='true', startColorstr='#4C000000', endColorstr='#4C000000'); background: rgba(0,0,0,.3);}
+  .javaex-swiper .javaex-swiper-focus-box ul{padding-left: 20px;padding: 18px 0 0 18px; overflow: hidden;}
+  .javaex-swiper .javaex-swiper-focus-box li{float: left; width: 240px; height: 90px; margin-right: 15px; position: relative;}
+  .javaex-swiper .javaex-swiper-focus-box li img{display: block; width: 140px; height: 70px; position: relative;}
+  .javaex-swiper .javaex-swiper-focus-box li.on img{border: 3px solid #24baf1;}
+
+  .javaex-swiper{width: 100%; height: 520px;}
+  .javaex-swiper ul.javaex-swiper-focus-bg li{width: 100%; height: 520px;}
+</style>
+
+<div style="width: 100%; height: 520px;">
+  <!--幻灯片-->
+  <div id="swiper" class="javaex-swiper">
+    <!--背景大图-->
+    <ul class="javaex-swiper-focus-bg">
+      <li>
+        <a href="javascript:;" target="_blank" style="background-image: url('img/1.png')">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" target="_blank" style="background-image: url('img/2.png')">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" target="_blank" style="background-image: url('img/3.png')">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" target="_blank" style="background-image: url('img/4.png')">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;" target="_blank" style="background-image: url('img/5.png')">
+        </a>
+      </li>
+    </ul>
+
+    <div class="wrapper">
+      <!--焦点，如果不需要焦点的话，直接去掉这个div即可-->
+      <div class="javaex-swiper-focus-box">
+        <ul>
+          <li>
+            <a href="javascript:;"><img src="img/1.png" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="img/2.png" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="img/3.png" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="img/4.png" /></a>
+          </li>
+          <li>
+            <a href="javascript:;"><img src="img/5.png" /></a>
+          </li>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  javaex.swiper({
+    id : "swiper",
+    delay : 3000
+  });
+</script>
+
+</script>
+</body>
+</html>
