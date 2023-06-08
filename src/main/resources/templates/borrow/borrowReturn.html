@@ -20,16 +20,16 @@
 <form id="form">
 
     <div class="javaex-unit clear">
-        <div class="javaex-unit-left"><p class="subtitle">用户名</p></div>
+        <div class="javaex-unit-left"><p class="subtitle">用户名：</p></div>
         <div class="javaex-unit-right">
-            <input type="text" id="username" class="javaex-text" data-type="required" placeholder="用户名" readonly/>
+            <div  id="username" class="javaex-desc-item-content" data-type="required"></div>
         </div>
     </div>
 
     <div class="javaex-unit clear">
-        <div class="javaex-unit-left"><p class="subtitle">可借数量</p></div>
+        <div class="javaex-unit-left"><p class="subtitle">可借数量：</p></div>
         <div class="javaex-unit-right">
-            <input type="text" id="balance" class="javaex-text" data-type="required" placeholder="可借数量" readonly/>
+            <div id="balance" class="javaex-desc-item-content" data-type="required"></div>
         </div>
     </div>
 
@@ -62,8 +62,11 @@
         $.get("/user/currUser", function(result) {
             const user = result.data
             console.log(user)
-            $("#username").val(user.username)
-            $("#balance").val(user.balance)
+            let div1 = document.getElementById("balance");
+            div1.innerText = user.balance;
+            let div2 = document.getElementById("username");
+            div2.innerText = user.username;
+
             $.get("/borrow/borrowed",{"userId":user.id} ,function(result) {
                 console.log(result.data)
                 let text = ""

@@ -30,8 +30,9 @@
     width:5em;
     font-size: 20px;
     font-weight:bold;
+    margin-bottom: 10px;
     ">
-                编辑图书
+                图书借阅
             </p>
         </div>
         <form id="form">
@@ -129,20 +130,20 @@
 
     const currentDate = new Date();
     const startDate = dateFormat("YYYY-mm-dd", currentDate);
-    const day = new Date();
-    day.setDate(day.getDate() + 1);
+    let day = new Date();
+    day.setMonth(day.getMonth() + 1);
     const endDate = dateFormat("YYYY-mm-dd", day);
-
+    console.log(day,endDate)
     let startTime = startDate;
     let endTime = endDate;
 
     javaex.date({
         id : "date2",
         monthNum : 2,
-        startDate : startDate,
+        beginDate : startDate,
         endDate : endDate,
         callback : function(rtn) {
-            startTime = rtn.startDate;
+            startTime = rtn.beginDate;
             endTime = rtn.endDate;
         }
     });
