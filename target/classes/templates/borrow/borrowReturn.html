@@ -18,7 +18,15 @@
 </head>
 <body>
 <form id="form">
-
+    <p style="
+    color:#000000;
+    padding:8px;
+    width:5em;
+    font-size: 20px;
+    font-weight:bold;
+    ">
+        图书归还
+    </p>
     <div class="javaex-unit clear">
         <div class="javaex-unit-left"><p class="subtitle">用户名</p></div>
         <div class="javaex-unit-right">
@@ -80,18 +88,16 @@
     })
     function returnBook(userId,bookId) {
         console.log(userId, bookId)
+        $.ajaxSettings.async = false;
         $.post("/borrow/ret",{"userId":userId,"bookId":bookId},function(result) {
             var code = result.code;
             if (code == 200) {
-                javaex.message({
-                    content : "修改成功",
-                    type : "success"
-                });
-                setTimeout(function(){window.location.href="borrow/borrowReturn";},800)
+                alert("归还成功!");
             }
         },"json");
 
         // 恢复异步
+        $.ajaxSettings.async = true;
     }
 </script>
 
