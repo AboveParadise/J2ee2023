@@ -83,6 +83,19 @@
               </div>
             </td>
           </tr>
+          <tr id="adm">
+            <td class="javaex-desc-item javaex-desc-item-cell">
+              <div class="javaex-desc-item-container">
+                <span class="javaex-desc-item-label">是否为管理员：</span>
+                <div>
+                  <select id="is_admin">
+                    <option value=true>是</option>
+                    <option value=false selected>否</option>
+                  </select>
+                </div>
+              </div>
+            </td>
+          </tr>
           <tr>
             <td colspan="2" class="javaex-desc-item javaex-desc-item-cell">
               <div class="javaex-desc-item-container">
@@ -108,14 +121,18 @@
 
 <script>
   let d;
-
+  let cur_user;
   javaex.select({
-    id : "select",
+    id : "is_admin",
     isSearch : false
   });
 
   // 页面加载执行
   $(document).ready(function(){
+    $.get("/user/currUser", function(data){
+      cur_user = data.data;
+      return false;
+    });
     var id = getQueryVariable("id");
     // get读取参数
     $.get("/user/detail",{"id": id}, function(data){
@@ -130,6 +147,10 @@
       $("#address").val(user.address);
       $("#size").val(user.balance);
       $("#select").text(user.identity);
+      $("is_admin").val(user.is_admin)
+      if (cur_user.is_admin === false){
+        $("#adm").hide();
+      }
       javaex.date({
         id : "birth",		// 承载日期组件的id
         monthNum : 1,		// 1代表选择单日日期
@@ -158,7 +179,7 @@
     var address = $("#address").val();
     var size = $("#size").val();
     var identity = $('#select option:selected').text();// 身份
-
+    var is_admin = $("is_admin").val();
     if (nickname == ""||nickname.length>12) {
       javaex.message({
         content : "昵称不能为空且长度不能大于12",
@@ -185,7 +206,7 @@
 
 
     var json = {"id":id,"nickname":nickname,"username":username,"pwd":pwd,"birth":birth,"tel":tel,
-      "email":email,"address":address,"balance":size,"identity":identity};
+      "email":email,"address":address,"balance":size,"identity":identity, "is_admin":is_admin};
     console.log(json)
     $.ajax({
       //请求方式

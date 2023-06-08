@@ -37,16 +37,19 @@
 		<div id="menu" class="javaex-menu">
 			<ul>
 				<li class="javaex-menu-item">
-					<a href="/index">首页<i class="ui-icon-home"></i></a>
+					<a href="/index">首页<i class="icon-home2"></i></a>
 				</li>
 			</ul>
 			<ul>
-				<li class="javaex-menu-item">
-					<a href="javascript:;">图书管理<i class="icon-angle-down"></i></a>
+				<li class="javaex-menu-item" id="manage-book">
+					<a href="javascript:;" >图书管理<i class="icon-angle-down"></i></a>
 					<ul>
 						<li><a href="javaScript:page('./book/bookList');">图书列表</a></li>
 						<li><a id="add-book" href="javaScript:page('book/bookAdd');">图书上架</a></li>
 					</ul>
+				</li>
+				<li class="javaex-menu-item" id="manage-book1">
+					<a href="javaScript:page('./book/bookList');">图书列表</a>
 				</li>
 			</ul>
 <!--			此处应有借阅--><ul>
@@ -63,8 +66,6 @@
 				<ul>
 					<li><a id="reader-list" href="javascript:page('user/userList.html');">读者列表</a></li>
 					<li><a id="reader-add" href="javascript:page('user/userAdd.html');">读者添加</a></li>
-<!--					<li><a id="user-manage" href="javascript:page('user/user-list');">用户管理</a></li>-->
-<!--					<li><a id="admin-add" href="javascript:page('user/adminAdd.html');">添加管理员</a></li>-->
 				</ul>
 			</li>
 			<ul>
@@ -86,7 +87,7 @@
 		left: 15%;
 		top:80px;
 		height: 100%;
-		width: 80%;
+		width: 82%;
 		">
 		</iframe>
 	</div>
@@ -120,6 +121,10 @@
 					$("#manage_reader").hide();
 					$("#admin-add").hide();
 					$("#reader-list").hide();
+					$("#manage-book").hide();
+				}
+				else{
+					$("#manage-book1").hide();
 				}
 			}
 

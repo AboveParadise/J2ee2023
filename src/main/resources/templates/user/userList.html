@@ -21,7 +21,8 @@
     color:#000000;
     padding:8px;
     width:5em;
-    font-size: 20px;
+    font-size: x-large;
+    margin-bottom: 10px;
     font-weight:bold;
     float: left;
     ">
@@ -54,7 +55,7 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
-        getUser(1,"",10);
+        getUser(1,"",6);
     });
     function getUser(page, keyword, pageSize) {
         $.ajax({
@@ -101,7 +102,7 @@
     }
 
     function updateUser(id) {
-        window.location.href = "/user/userList"
+        window.location.href = "/user/userEdit?id=" + id
     }
 
     function delUser(obj, id) {
