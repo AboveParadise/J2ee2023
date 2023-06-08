@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -75,6 +75,7 @@
                         <td class="javaex-desc-item javaex-desc-item-cell">
                             <div class="javaex-desc-item-container">
                                 <span class="javaex-desc-item-label">生日：</span>
+
                                 <input type="text" id="birth" class="javaex-date" style="width: 140px;" value="" readonly/>
                                 <!--                <div class="javaex-desc-item-content" id="birth"></div>-->
                             </div>
@@ -86,12 +87,20 @@
                                 <span class="javaex-desc-item-label">是否为管理员：</span>
                                 <div>
                                 <select id="is_admin">
-                                    <option value="1">是</option>
-                                    <option value="0" selected>否</option>
+                                    <option value=true>是</option>
+                                    <option value=false selected>否</option>
                                 </select>
                                 </div>
 <!--                                <input type="text" id="is_admin" class="javaex-date" style="width: 140px;" value="" readonly/>-->
                                 <!--                <div class="javaex-desc-item-content" id="birth"></div>-->
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" class="javaex-desc-item javaex-desc-item-cell">
+                            <div class="javaex-desc-item-container">
+                                <span class="javaex-desc-item-label">可借数量：</span>
+                                <input type="text" class="javaex-text" id="size" name="size" value="5"/>
                             </div>
                         </td>
                     </tr>
@@ -109,7 +118,7 @@
             <div class="unit clear" style="width: 800px;">
                 <div style="text-align: center;">
                     <!--表单提交时，必须是input元素，并指定type类型为button，否则ajax提交时，会返回error回调函数-->
-                    <input type="button" id="return" class="javaex-btn info" value="返回" />
+<!--                    <input type="button" id="return" class="javaex-btn info" value="返回" />-->
                     <input type="button" id="save" class="javaex-btn primary" value="保存" />
                 </div>
             </div>
@@ -120,10 +129,19 @@
 <script>
     let d;
     javaex.select({
-        id : "select",
+        id : "is_admin",
         isSearch : false
     });
-
+    javaex.date({
+        id : "birth",		// 承载日期组件的id
+        monthNum : 1,		// 1代表选择单日日期
+        time : "2023-01-01",	// 选择的日期
+        // 重新选择日期之后返回一个时间对象
+        callback : function(rtn) {
+            d = rtn.date;
+            // alert(rtn.date);
+        }
+    });
     // 监听点击保存按钮事件
     $("#save").click(function() {
         console.log(d)
@@ -139,7 +157,8 @@
         var size = $("#size").val();
         // var identity = $('#select option:selected').text();// 身份
         var is_admin = $("#is_admin").val()
-        if (nickname == ""||nickname.length>12) {
+
+        if (nickname === ""||nickname.length>12) {
             javaex.message({
                 content : "昵称不能为空且长度不能大于12",
                 type : "error"
@@ -147,7 +166,7 @@
             return false;
         }
 
-        if (username == ""||username.length>12) {
+        if (username === ""||username.length>12) {
             javaex.message({
                 content : "用户名不能为空且长度不能大于12",
                 type : "error"
@@ -155,7 +174,7 @@
             return false;
         }
 
-        if (pwd == ""||pwd.length>18) {
+        if (pwd === ""||pwd.length>18) {
             javaex.message({
                 content : "密码不能为空且长度不能大于18",
                 type : "error"
@@ -164,8 +183,8 @@
         }
 
 
-        var json = {"id":id,"nickname":nickname,"username":username,"pwd":pwd,"birth":birth,
-            "is_admin":is_admin,"tel":tel,"email":email,"address":address,"balance":size,"identity":identity};
+        var json = {"nickname":nickname,"username":username,"pwd":pwd,"birth":d,
+            "is_admin":is_admin,"tel":tel,"email":email,"address":address,"balance":size,"identity":0};
         console.log(json)
         $.ajax({
             //请求方式
@@ -213,7 +232,7 @@
         var vars = query.split("&");
         for (var i=0;i<vars.length;i++) {
             var pair = vars[i].split("=");
-            if(pair[0] == variable){return pair[1];}
+            if(pair[0] === variable){return pair[1];}
         }
         return false;
     }

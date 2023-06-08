@@ -40,7 +40,7 @@
 					<a href="javascript:;">图书管理<i class="icon-angle-down"></i></a>
 					<ul>
 						<li><a href="javaScript:page('./book/bookList');">图书列表</a></li>
-						<li><a href="javaScript:page('book/bookAdd');">图书上架</a></li>
+						<li><a id="add-book" href="javaScript:page('book/bookAdd');">图书上架</a></li>
 					</ul>
 				</li>
 			</ul>
@@ -59,7 +59,7 @@
 					<li><a id="reader-list" href="javascript:page('user/userList.html');">读者列表</a></li>
 					<li><a id="reader-add" href="javascript:page('user/userAdd.html');">读者添加</a></li>
 <!--					<li><a id="user-manage" href="javascript:page('user/user-list');">用户管理</a></li>-->
-					<li><a id="admin-add" href="javascript:page('user/adminAdd.html');">添加管理员</a></li>
+<!--					<li><a id="admin-add" href="javascript:page('user/adminAdd.html');">添加管理员</a></li>-->
 				</ul>
 			</li>
 			<ul>
@@ -105,8 +105,8 @@
 				$("#nickname").text(user.nickname);
 				// 根据用户权限, 控制用户可见菜单
 				var auth = user.is_admin;
-				// is_admin为0代表非管理员
-				if (auth === 0) {
+				// is_admin为false代表非管理员
+				if (auth === false) {
 					console.log(auth);
 					// 若为普通用户权限, 则无法访问修改类菜单 无法添加图书,添加读者,管理用户以及添加管理员
 					$("#add-book").hide();
