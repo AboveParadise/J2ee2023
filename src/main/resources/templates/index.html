@@ -25,7 +25,7 @@
 			<!--右侧-->
 			<ul class="javaex-nav fr">
 				<li>
-					<a href="javascript:;">欢迎您，管理员</a>
+					<a href="javascript:page('./user/userinfo.html');" id="n"></a>
 					<ul class="javaex-nav-dropdown-menu" style="right: 10px;">
 						<li><a href="/logout">退出当前账号</a></li>
 					</ul>
@@ -107,6 +107,8 @@
 		$.get("/user/currUser", function(data){
 			var code = data.code;
 			var user = data.data;
+			let a = document.getElementById("n");
+			a.innerText = "欢迎您，"+user.nickname;
 			if (code == 200) {
 				// 设置用户昵称
 				$("#nickname").text(user.nickname);
