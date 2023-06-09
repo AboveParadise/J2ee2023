@@ -30,7 +30,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 //请求授权
                 .authorizeRequests()
-                .antMatchers("/javaex/**","/","/favicon.ico","/login","/user/login", "/register").permitAll()
+                .antMatchers("/javaex/**","/","/favicon.ico","/login","/user/login", "/register","/user/add").permitAll()
                 //所有请求都被拦截，都需认证
                 .anyRequest().authenticated()
                 .and()
