@@ -113,7 +113,7 @@
                 "username": username, "pwd": password, "is_admin": false
             }),
             success: function (result) {
-                if (result.code == 200) {
+                if (result.code === 200) {
                     javaex.message({
                         content : "注册成功",
                         type : "success"
