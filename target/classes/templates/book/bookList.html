@@ -81,7 +81,10 @@
                 pages++;
             }
             let tableItems = "";
-            $("#calc").hide()
+            if(user.is_admin === false){
+                $("#calc").hide()
+            }
+
             javaex.page({
                 id : "page",
                 pageNum : currPage,
